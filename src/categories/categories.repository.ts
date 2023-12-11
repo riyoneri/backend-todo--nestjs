@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InternalServerErrorException } from '@nestjs/common';
-import { db } from 'src/main';
+import { db } from 'src/helpers/db';
 import { v4 as uuid } from 'uuid';
 
 @Injectable()
