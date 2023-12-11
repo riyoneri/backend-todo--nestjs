@@ -5,6 +5,10 @@ import { CategoriesRepository } from './categories.repository';
 export class CategoriesService {
   constructor(private categoriesRepository: CategoriesRepository) {}
 
+  createCategory(name: string) {
+    return this.categoriesRepository.addCategory(name);
+  }
+
   getAllCategories() {
     return this.categoriesRepository.getAllCategories();
   }
