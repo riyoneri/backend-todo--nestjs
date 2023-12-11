@@ -9,7 +9,10 @@ const nanoid = customAlphabet(alphabet, 3);
 
 @Injectable()
 export class CategoriesRepository {
- 
+  addCategory(name: string) {
+    const newCategory: Category = { id: Number(nanoid()), name };
+    return db.push('/categories[]', newCategory, true);
+  }
 
   async getAllCategories() {
     try {
