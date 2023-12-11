@@ -8,4 +8,8 @@ export class TasksService {
   getAllTasks() {
     return this.tasksRepository.getAllTasks();
   }
+
+  getOneTask(id: number) {
+    return this.tasksRepository.getOneTask(id);
+  }
 }
