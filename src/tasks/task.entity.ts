@@ -9,5 +9,5 @@ export interface Task {
   title: string;
   status: Status;
   description: string;
-  category: number;
+  category: string;
 }
