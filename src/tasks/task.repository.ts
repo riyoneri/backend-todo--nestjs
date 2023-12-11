@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InternalServerErrorException } from '@nestjs/common';
 import { db } from 'src/main';
 
@@ -12,5 +12,15 @@ export class TasksRepository {
         'An error occured while fetching tasks',
       );
     }
+  }
+
+  async getOneTask(id: number) {
+    const data = await db.getData('/tasks');
+    const task = data.find((data) => data.id === id);
+
+    if (!data) throw new NotFoundException('Task not found');
+    if (!task) throw new NotFoundException('Task not found');
+
+    return await db.getData(`/tasks`);
   }
 }
