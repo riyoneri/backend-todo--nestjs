@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InternalServerErrorException } from '@nestjs/common';
 import { db } from 'src/main';
+import { Task } from './task.entity';
 
 @Injectable()
 export class TasksRepository {
@@ -16,7 +17,7 @@ export class TasksRepository {
 
   async getOneTask(id: number) {
     const data = await db.getData('/tasks');
-    const task = data.find((data) => data.id === id);
+    const task = data.find((data: Task) => data.id === id);
 
     if (!data) throw new NotFoundException('Task not found');
     if (!task) throw new NotFoundException('Task not found');

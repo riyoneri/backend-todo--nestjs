@@ -1,17 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InternalServerErrorException } from '@nestjs/common';
 import { db } from 'src/main';
-import { customAlphabet } from 'nanoid';
-import { Category } from './category.entity';
-
-const alphabet = '123456789';
-const nanoid = customAlphabet(alphabet, 3);
+import { v4 as uuid } from 'uuid';
 
 @Injectable()
 export class CategoriesRepository {
   addCategory(name: string) {
-    const newCategory: Category = { id: Number(nanoid()), name };
-    return db.push('/categories[]', newCategory, true);
+    return db.push('/categories[]', { id: uuid(), name }, true);
   }
 
   async getAllCategories() {
