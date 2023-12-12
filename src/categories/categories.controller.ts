@@ -39,6 +39,22 @@ export class CategoriesController {
   }
 
   @Delete(':id')
+  @ApiResponse({
+    status: 200,
+    description: 'Request was successfull',
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Category not found',
+  })
+  @ApiResponse({
+    status: 409,
+    description: 'Category is being used by one or more tasks',
+  })
+  @ApiResponse({
+    status: 500,
+    description: 'Internal server error',
+  })
   deleteCategory(@Param('id') id: string) {
     return this.categoriesService.deleteCategory(id);
   }
