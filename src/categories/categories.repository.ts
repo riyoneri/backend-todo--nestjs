@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InternalServerErrorException } from '@nestjs/common';
 import { db } from 'src/helpers/db';
 import { v4 as uuid } from 'uuid';
-import { Category } from './category.entity';
 
 @Injectable()
 export class CategoriesRepository {
@@ -12,8 +11,7 @@ export class CategoriesRepository {
 
   async getAllCategories() {
     try {
-      const allCategories: Category[] = await db.getData('/categories');
-      return allCategories;
+      return await db.getData('/categories');
     } catch (err) {
       throw new InternalServerErrorException(
         'An error occured while fetching categories',
