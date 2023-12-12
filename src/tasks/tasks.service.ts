@@ -10,11 +10,15 @@ export class TasksService {
     return this.tasksRepository.getAllTasks();
   }
 
-  getOneTask(id: number) {
+  getOneTask(id: string) {
     return this.tasksRepository.getOneTask(id);
   }
 
   createTask(body: CreateTaskDto) {
     return this.tasksRepository.createtask(body);
+  }
+
+  deleteTask(id: string) {
+    return this.tasksRepository.deleteTask(id);
   }
 }
