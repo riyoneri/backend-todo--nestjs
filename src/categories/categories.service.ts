@@ -12,4 +12,8 @@ export class CategoriesService {
   getAllCategories() {
     return this.categoriesRepository.getAllCategories();
   }
+
+  deleteCategory(id: string) {
+    return this.categoriesRepository.deleteCategory(id);
+  }
 }
