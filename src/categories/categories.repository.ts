@@ -5,7 +5,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InternalServerErrorException } from '@nestjs/common';
-import { db } from 'src/helpers/db';
+import { db } from '../helpers/db';
 import { v4 as uuid } from 'uuid';
 import { Category } from './category.entity';
 import { Task } from 'src/tasks/task.entity';
