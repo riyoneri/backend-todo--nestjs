@@ -9,6 +9,7 @@ import { db } from 'src/helpers/db';
 import { Status, Task } from './task.entity';
 import { CreateTaskDto } from './dtos/create-task.dto';
 import { v4 as uuid } from 'uuid';
+import { Category } from 'src/categories/category.entity';
 
 @Injectable()
 export class TasksRepository {
@@ -37,9 +38,12 @@ export class TasksRepository {
 
   async createtask(body: CreateTaskDto) {
     try {
-      const category = await db.getIndex('/categories', body.category, 'id');
+      const category = await db.find(
+        '/categories',
+        (category: Category) => category.id === body.category,
+      );
 
-      if (category < 0) throw new ForbiddenException('Invalid category id');
+      if (!category) throw new ForbiddenException('Invalid category id');
 
       db.push('/tasks[]', { id: uuid(), ...body, status: Status.OPEN }, true);
     } catch (err) {
