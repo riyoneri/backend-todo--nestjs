@@ -11,7 +11,7 @@ export class CategoriesController {
   @Post()
   @ApiResponse({
     status: 201,
-    description: 'The category has been successfully created.',
+    description: 'Request was successfull',
   })
   @ApiResponse({
     status: 400,
@@ -28,7 +28,7 @@ export class CategoriesController {
   @Get()
   @ApiResponse({
     status: 200,
-    description: 'All categories',
+    description: 'Request was successfull',
   })
   @ApiResponse({
     status: 500,
