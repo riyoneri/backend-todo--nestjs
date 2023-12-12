@@ -5,7 +5,7 @@ export enum Status {
 }
 
 export interface Task {
-  id: number;
+  id: string;
   title: string;
   status: Status;
   description: string;

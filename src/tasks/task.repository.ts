@@ -23,7 +23,7 @@ export class TasksRepository {
     }
   }
 
-  async getOneTask(id: number) {
+  async getOneTask(id: string) {
     try {
       const task = await db.find('/tasks', (task: Task) => task.id === id);
 
@@ -46,6 +46,18 @@ export class TasksRepository {
       if (!category) throw new ForbiddenException('Invalid category id');
 
       db.push('/tasks[]', { id: uuid(), ...body, status: Status.OPEN }, true);
+    } catch (err) {
+      if (err instanceof HttpException) throw err;
+      throw new InternalServerErrorException('Something went wrong!');
+    }
+  }
+
+  async deleteTask(id: string) {
+    try {
+      const taskIndex = await db.getIndex('/tasks', id, 'id');
+      if (taskIndex < 0) throw new NotFoundException('Task not found');
+
+      return await db.delete(`/tasks[${taskIndex}]`);
     } catch (err) {
       if (err instanceof HttpException) throw err;
       throw new InternalServerErrorException('Something went wrong!');
