@@ -1,17 +1,19 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsUUID } from 'class-validator';
+import { IsString, IsUUID, IsNotEmpty } from 'class-validator';
 
 export class CreateTaskDto {
   @ApiProperty({
     description: 'Title of new task',
   })
   @IsString()
+  @IsNotEmpty()
   title: string;
 
   @ApiProperty({
     description: 'Description of new task',
   })
   @IsString()
+  @IsNotEmpty()
   description: string;
 
   @ApiProperty({
