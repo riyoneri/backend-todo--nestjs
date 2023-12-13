@@ -21,8 +21,8 @@ export class CategoriesController {
     status: 500,
     description: 'Internal server error',
   })
-  createCategory(@Body() body: CreateCategoryDto) {
-    return this.categoriesService.createCategory(body.name);
+  createCategory(@Body() { name }: CreateCategoryDto) {
+    return this.categoriesService.createCategory(name);
   }
 
   @Get()
