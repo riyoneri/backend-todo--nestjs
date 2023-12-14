@@ -1,12 +1,20 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TasksController } from './tasks.controller';
 import { TasksService } from './tasks.service';
+import { Status, Task } from './task.entity';
 
 describe('TasksController', () => {
   let controller: TasksController;
   const fakeService: Partial<TasksService> = {
     getAllTasks: () => Promise.resolve([]),
-    getOneTask: () => Promise.resolve(),
+    getOneTask: (): Promise<Task> =>
+      Promise.resolve({
+        id: '1',
+        title: 'Task title',
+        status: Status.DONE,
+        category: '1',
+        description: 'This is category description',
+      }),
     createTask: () => Promise.resolve(),
     deleteTask: () => Promise.resolve(),
   };
@@ -33,7 +41,13 @@ describe('TasksController', () => {
   it('should get one task', async () => {
     const task = await controller.getOneTask('1');
 
-    expect(task).toBeUndefined();
+    expect(task).toEqual({
+      id: '1',
+      title: 'Task title',
+      status: Status.DONE,
+      category: '1',
+      description: 'This is category description',
+    });
   });
 
   it('should create task', async () => {
