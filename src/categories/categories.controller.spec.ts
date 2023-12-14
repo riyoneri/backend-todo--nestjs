@@ -4,7 +4,7 @@ import { CategoriesService } from './categories.service';
 
 describe('CategoriesController', () => {
   let controller: CategoriesController;
-  const fakeController: Partial<CategoriesService> = {
+  const fakeCategoriesService: Partial<CategoriesService> = {
     createCategory: () => Promise.resolve(),
     getAllCategories: () => Promise.resolve([]),
     deleteCategory: () => Promise.resolve(),
@@ -13,7 +13,9 @@ describe('CategoriesController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [CategoriesController],
-      providers: [{ provide: CategoriesService, useValue: fakeController }],
+      providers: [
+        { provide: CategoriesService, useValue: fakeCategoriesService },
+      ],
     }).compile();
 
     controller = module.get<CategoriesController>(CategoriesController);
